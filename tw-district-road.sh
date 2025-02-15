@@ -14,11 +14,12 @@ tmp=$(mktemp)
 tail -n +2 "$opendata" | cut -d, -f1 | sort -u > $tmp
 tail -n +2 "$opendata" | cut -d, -f1 | sort -u | tr  -d "縣市" >> $tmp
 
-tail -n +2 "$opendata" | cut -d, -f2 | sort -u >> $tmp
-tail -n +2 "$opendata" | cut -d, -f2 | sort -u | tr  -d "縣市" >> $tmp
-tail -n +2 "$opendata" | cut -d, -f2 | sort -u | tr  -d "縣市" | sed '/^.\{5,\}$/s/\(.*\)./\1/' | sort -u >> $tmp
-tail -n +2 "$opendata" | cut -d, -f2 | cut -c 4- | sort -u >> $tmp
-tail -n +2 "$opendata" | cut -d, -f2 | cut -c 4- | sed '/^.\{3,\}$/s/\(.*\)./\1/' | sort -u >> $tmp
+tail -n +2 "$opendata" | cut -d, -f2 | sort -u >> $tmp #臺北市大安區
+tail -n +2 "$opendata" | cut -d, -f2 | sort -u | tr  -d "縣市" >> $tmp #臺北大安區
+tail -n +2 "$opendata" | cut -d, -f2 | sort -u | tr  -d "縣市" | sed '/^.\{5,\}$/s/\(.*\)./\1/' | sort -u >> $tmp #臺北大安
+tail -n +2 "$opendata" | cut -d, -f2 | sort -u | sed '/^.\{6,\}$/s/\(.*\)./\1/' | sort -u >> $tmp #臺北市大安
+tail -n +2 "$opendata" | cut -d, -f2 | cut -c 4- | sort -u >> $tmp #大安區
+tail -n +2 "$opendata" | cut -d, -f2 | cut -c 4- | sed '/^.\{3,\}$/s/\(.*\)./\1/' | sort -u >> $tmp #大安
 
 tai=$(mktemp)
 cat $tmp | tr "臺" "台" > $tai
