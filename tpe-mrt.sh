@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # 建立輸出檔案
-output_file="taipei-mrt.txt"
+output_file="tpe-mrt.txt"
 > "$output_file"
 
 # 寫入路線名稱
