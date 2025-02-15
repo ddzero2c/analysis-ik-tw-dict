@@ -20,9 +20,13 @@ tail -n +2 "$opendata" | cut -d, -f2 | sort -u | tr  -d "縣市" | sed '/^.\{5,\
 tail -n +2 "$opendata" | cut -d, -f2 | cut -c 4- | sort -u >> $tmp
 tail -n +2 "$opendata" | cut -d, -f2 | cut -c 4- | sed '/^.\{3,\}$/s/\(.*\)./\1/' | sort -u >> $tmp
 
-cat $tmp | sort -u > $district
+tai=$(mktemp)
+cat $tmp | tr "臺" "台" > $tai
+cat $tmp $tai | sort -u > $district
 echo "已生成 $district"
 
-tail -n +2 "$opendata" | cut -d, -f3 | sort -u > $road
+tail -n +2 "$opendata" | cut -d, -f3 | sort -u > $tmp
+cat $tmp | tr "臺" "台" > $tai
+cat $tmp $tai | sort -u > $road
 echo "已生成 $road"
 
